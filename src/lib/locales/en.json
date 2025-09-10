@@ -1,0 +1,13 @@
+{
+    "settings": {
+        "title": "Settings",
+        "description": "Adjust your preferences and configurations here.",
+        "language": "Language",
+        "notation": {
+            "title": "Number Notation",
+            "standard": "Standard",
+            "scientific": "Scientific",
+            "engineering": "Engineering"
+        }
+    }
+}
