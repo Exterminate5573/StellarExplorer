@@ -15,7 +15,7 @@ export class Upgrade extends GameComponent {
     }
 
     public canAfford(): boolean {
-        return this.layer.currency.gte(this.cost)  && !this.bought;
+        return this.layer.currency.gte(this.cost) && !this.bought;
     }
 
     public buy(): void {

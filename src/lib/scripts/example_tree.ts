@@ -1,7 +1,7 @@
 import Decimal from "break_eternity.js";
-import { Tree } from "../interfaces/tree";
-import { ExampleLayer } from "./example_layer";
-import type { Layer } from "../interfaces/layer";
+import { Tree } from "./interfaces/tree";
+import { ExampleLayer } from "./layers/example_layer";
+import type { Layer } from "./interfaces/layer";
 
 export class ExampleTree extends Tree {
 
@@ -9,7 +9,7 @@ export class ExampleTree extends Tree {
         super(new Decimal(10));
     }
 
-    public getTree(): Layer[] {
+    public createTree(): Layer[] {
         return [
             new ExampleLayer(this)
         ];

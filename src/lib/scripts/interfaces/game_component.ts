@@ -6,7 +6,7 @@ export abstract class GameComponent {
     public componentId: string;
     public unlocked: boolean;
     public layer: Layer;
-    public svelteComponent: Component;
+    public svelteComponent: Component<any>;
 
     constructor(componentId: string, layer: Layer, svelteComponent: Component<any>, unlocked?: boolean) {
         this.componentId = componentId;

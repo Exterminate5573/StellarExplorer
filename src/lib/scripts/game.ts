@@ -1,12 +1,15 @@
-import SettingsPage from "$lib/pages/SettingsPage.svelte";
+import SettingsPage from "$lib/pages/settings_page.svelte";
 import { settings } from "./interfaces/settings.svelte";
 import type { Tree } from "./interfaces/tree";
-import { ExampleTree } from "./layers/example_tree";
+import { ExampleTree } from "./example_tree";
+import { derived, writable } from "svelte/store";
+import type { Layer } from "./interfaces/layer";
 
 class Game {
     public version: string;
     public lastUpdate: number;
     public tree: Tree;
+    public stateUpdated: () => void = () => {};
     
     // Set up your game here
     constructor() {
@@ -16,19 +19,26 @@ class Game {
     }
 
     public start(): void {
-        console.log("Game started");
 
         // Load settings when component mounts
         settings.loadSettings();
 
-        // Load game state
+        // Load game save
 
         // Start the game loop
         setInterval(() => {
             const now = Date.now();
             const diff = now - this.lastUpdate;
+
+            // Set a maximum offline time
+            if (diff > 3600000) {
+                this.lastUpdate = 3600000; // Cap the offline time to 1 hour
+            }
+
             this.update(diff);
             this.lastUpdate = now;
+
+            this.stateUpdated();
         }, 50);
     }
 
@@ -41,11 +51,14 @@ class Game {
         this.tree = new ExampleTree();
     }
 
-    public getCurrentLayer() {
-        if (settings.currentPageName === "settings") return null;
-        return this.tree.getLayer(settings.currentPageName);
+    public getCurrentLayer(): Layer {
+        return this.tree.getLayer(settings.currentPageName) ?? this.tree.tree[0];
     }
 
 }
 
 export const game = new Game();
+export const gameStore = writable(game);
+game.stateUpdated = () => {
+    gameStore.set(game);
+}

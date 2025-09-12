@@ -4,15 +4,17 @@ import type { Layer } from "./layer";
 export abstract class Tree {
 
     public baseCurrency: Decimal;
+    public tree: Layer[];
 
     constructor(baseCurrency: Decimal) {
         this.baseCurrency = baseCurrency;
+        this.tree = this.createTree();
     }
 
-    public abstract getTree(): Layer[];
+    public abstract createTree(): Layer[];
 
     public getLayer(layerId: string): Layer | undefined {
-        return this.getTree().find(layer => layer.layerID === layerId);
+        return this.tree.find(layer => layer.layerID === layerId);
     }
     
     public abstract currencyPerSecond(): Decimal;
@@ -22,8 +24,7 @@ export abstract class Tree {
     }
 
     update(diff: number) {
-        const layers = this.getTree();
-        for (const layer of layers) {
+        for (const layer of this.tree) {
             layer.update(diff);
         }
 

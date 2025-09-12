@@ -1,22 +1,40 @@
 <script lang="ts">
+    import { gameStore, game } from "$lib/scripts/game";
     import type { Upgrade } from "$lib/scripts/interfaces/upgrade";
     import { t } from "svelte-i18n";
+    import { derived } from "svelte/store";
 
-    let { component } = $props();
-    const upgrade = component as Upgrade;
+    let { id } = $props();
 
-    const canAfford: boolean = $derived(upgrade.canAfford());
-    const color: string = $derived(upgrade.getColor());
-    const borderColor: string = $derived(upgrade.getBorderColor());
+    let upgrade = derived(gameStore, ($game) => {
+        let layer = $game.getCurrentLayer();
+        let upgrade = layer.getSubcomponentByID(id) as Upgrade;
+        return upgrade;
+    });
+
+    let canAfford = derived(upgrade, ($upgrade) => {
+        return $upgrade.canAfford();
+    });
+    let color = derived(upgrade, ($upgrade) => {
+        return $upgrade.getColor();
+    });
+    let borderColor = derived(upgrade, ($upgrade) => {
+        return $upgrade.getBorderColor();
+    });
+
+    function buyUpgrade() {
+        let layer = game.getCurrentLayer();
+        let upgrade = layer.getSubcomponentByID(id) as Upgrade;
+        upgrade.buy();
+    }
 </script>
 
-<button class="btn" onclick={() => upgrade.buy()} disabled={!canAfford} 
-    style="background-color: {color}; border-color: {borderColor}; border-width: 2px;">
+<button class="btn" onclick={buyUpgrade} disabled={!$canAfford} 
+    style="background-color: {$color}; border-color: {$borderColor}; border-width: 2px;">
 
     <div class="flex flex-col items-start">
-        <span class="font-bold">{$t(upgrade.layer.layerID + "." + upgrade.componentId + ".name")}</span>
-        <span class="text-sm">{$t(upgrade.layer.layerID + "." + upgrade.componentId + ".description")}</span>
-        <span class="text-sm">{upgrade.cost}</span>
+        <span class="font-bold">{$t($upgrade.layer.layerID + "." + id + ".name")}</span>
+        <span class="text-sm">{$t($upgrade.layer.layerID + "." + id + ".description")}</span>
+        <span class="text-sm">{$upgrade.cost}</span>
     </div>
-
 </button>

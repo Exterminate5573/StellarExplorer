@@ -1,13 +1,17 @@
 <script lang="ts">
-    import LayerPage from "$lib/pages/LayerPage.svelte";
-    import SettingsPage from "$lib/pages/SettingsPage.svelte";
-    import { game } from "$lib/scripts/game";
+    import LayerPage from "$lib/pages/layer_page.svelte";
+    import SettingsPage from "$lib/pages/settings_page.svelte";
+    import { game, gameStore } from "$lib/scripts/game";
     import { settings } from "$lib/scripts/interfaces/settings.svelte";
-    import { onMount } from "svelte";
-    import { t } from 'svelte-i18n'
+    import { onDestroy, onMount } from "svelte";
+    import { t } from 'svelte-i18n';
 
     onMount(() => {
         game.start();
+    });
+
+    onDestroy(() => {
+        //TODO: Add any cleanup logic if necessary
     });
 </script>
 
@@ -33,11 +37,14 @@
 
         <!-- List of each layer -->
         <div class="mt-16 mb-16 overflow-y-auto">
-            {#each game.tree.getTree() as layer}
+            <!-- TODO: Only show unlocked tree layers -->
+            {#each $gameStore.tree.tree as layer}
                 <button class="align-left p-4 hover:bg-neutral-600 w-full" aria-label={layer.layerID} onclick={() => settings.currentPageName = layer.layerID}>
                     <div class="flex">
                         {#if settings.sidebarExtended}
                             <span class="ml-2">{$t(layer.layerID + ".name")}</span>
+                        {:else}
+                            <span class="sr-only">{$t(layer.layerID + ".name")}</span>
                         {/if}
                     </div>
                 </button>
@@ -65,7 +72,7 @@
         {#if settings.currentPageName === "settings"}
             <SettingsPage />
         {:else}
-            <LayerPage layer={game.getCurrentLayer()} />
+            <LayerPage />
         {/if}
     </div>
 </div>

@@ -15,7 +15,6 @@ class Settings {
 
     }
 
-
     public saveSettings() {
         let jsonify = JSON.stringify({
             sidebarExtended: this.sidebarExtended,

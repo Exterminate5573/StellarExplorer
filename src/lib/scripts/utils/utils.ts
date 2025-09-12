@@ -4,17 +4,17 @@ import Decimal from "break_eternity.js";
 import { settings } from "../interfaces/settings.svelte";
 
 export function formatNumber(num: Decimal): string {
-        if (settings.notation === "standard") {
-            return num.toString();
-        } else if (settings.notation === "scientific") {
-            return num.toExponential(2);
-        } else if (settings.notation === "engineering") {
-            let exponent = num.log10().floor().div(3).floor().mul(3).toNumber();
-            let mantissa = num.div(new Decimal(10).pow(exponent));
-            return mantissa.toFixed(2) + "e" + exponent;
-        } else {
-            return num.toString();
-        }
+    if (settings.notation === "standard") {
+        return num.toString();
+    } else if (settings.notation === "scientific") {
+        return num.toExponential(2);
+    } else if (settings.notation === "engineering") {
+        let exponent = num.log10().floor().div(3).floor().mul(3).toNumber();
+        let mantissa = num.div(new Decimal(10).pow(exponent));
+        return mantissa.toFixed(2) + "e" + exponent;
+    } else {
+        return num.toString();
+    }
 }
 
 // ------------------------------------------------

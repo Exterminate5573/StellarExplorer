@@ -9,6 +9,7 @@ export class ExampleLayer extends Layer {
     }
 
     public registerSubcomponents(): void {
+        console.log("Registering example upgrade");
         this.subcomponents.push(
             new Upgrade(
                 "example_upgrade",
