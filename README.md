@@ -1,2 +1,2 @@
-# Count to One!
-An incremental game about counting to 1
+# Incremental Builder
+A svelte toolkit to build incremental games

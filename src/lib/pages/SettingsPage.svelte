@@ -1,6 +1,6 @@
 <script lang="ts">
     import { t } from 'svelte-i18n'
-    import { settings } from '$lib/scripts/settings.svelte';
+    import { settings } from '$lib/scripts/interfaces/settings.svelte';
 
     $effect(() => {
         // Save settings whenever they change

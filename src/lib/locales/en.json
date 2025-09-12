@@ -9,5 +9,15 @@
             "scientific": "Scientific",
             "engineering": "Engineering"
         }
+    },
+    "sidebar": {
+        "settings": "Settings"
+    },
+    "game": {
+        "name": "Example Incremental Game"
+    },
+    "example_layer": {
+        "header": "You have {count} points",
+        "gaining": "You are gaining {rate} points per second"
     }
 }

@@ -1,8 +1,9 @@
 <script lang="ts">
-    import PageComponent from "$lib/components/PageComponent.svelte";
-    import SettingsPage from "$lib/components/SettingsPage.svelte";
-    import { settings } from "$lib/scripts/settings.svelte";
+    import PageComponent from "$lib/pages/LayerPage.svelte";
+    import SettingsPage from "$lib/pages/SettingsPage.svelte";
+    import { settings } from "$lib/scripts/interfaces/settings.svelte";
     import { onMount } from "svelte";
+    import { t } from 'svelte-i18n'
 
     onMount(() => {
         // Load settings when component mounts
@@ -19,7 +20,7 @@
         <!-- Title -->
         <div class="absolute top-0 w-full flex">
             {#if settings.sidebarExtended}
-                <h1 class="text-2xl font-bold p-4 whitespace-nowrap">Count to 1</h1>
+                <h1 class="text-2xl font-bold p-4 whitespace-nowrap">{$t("game.name")}</h1>
             {/if}
             <button class="ml-auto p-4 hover:bg-neutral-600" aria-label="Toggle Sidebar" onclick={() => settings.sidebarExtended = !settings.sidebarExtended}>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -43,7 +44,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                     {#if settings.sidebarExtended}
-                        <span class="ml-2">Settings</span>
+                        <span class="ml-2">{$t("sidebar.settings")}</span>
                     {/if}
                 </div>
             </button>
