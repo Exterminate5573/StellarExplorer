@@ -14,10 +14,15 @@
         "settings": "Settings"
     },
     "game": {
-        "name": "Example Incremental Game"
+        "name": "Example Game"
     },
     "example_layer": {
+        "name": "Points",
         "header": "You have {count} points",
-        "gaining": "You are gaining {rate} points per second"
+        "gaining": "You are gaining {rate} points per second",
+        "example_upgrade": {
+            "name": "The Beginning",
+            "description": "Start generating points."
+        }
     }
 }
