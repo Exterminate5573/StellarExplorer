@@ -1,0 +1,28 @@
+{
+    "settings": {
+        "title": "Settings",
+        "description": "Adjust your preferences and configurations here.",
+        "language": "Language",
+        "notation": {
+            "title": "Number Notation",
+            "standard": "Standard",
+            "scientific": "Scientific",
+            "engineering": "Engineering"
+        }
+    },
+    "sidebar": {
+        "settings": "Settings"
+    },
+    "game": {
+        "name": "Example Game"
+    },
+    "example_layer": {
+        "name": "Points",
+        "header": "You have {count} points",
+        "gaining": "You are gaining {rate} points per second",
+        "example_upgrade": {
+            "name": "The Beginning",
+            "description": "Start generating points."
+        }
+    }
+}
