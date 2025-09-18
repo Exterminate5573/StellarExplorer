@@ -5,7 +5,7 @@ import { settings } from "../interfaces/settings.svelte";
 
 export function formatNumber(num: Decimal): string {
     if (settings.notation === "standard") {
-        return num.toString();
+        return num.toFixed(2);
     } else if (settings.notation === "scientific") {
         return num.toExponential(2);
     } else if (settings.notation === "engineering") {
@@ -19,7 +19,7 @@ export function formatNumber(num: Decimal): string {
 
 // ------------------------------------------------
 
-export function greyOutColor(hex: string, amount: number = 0.5): string {
+export function highlightColor(hex: string, amount: number = 0.5): string {
     // Convert hex to RGB
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);
@@ -39,7 +39,8 @@ export function greyOutColor(hex: string, amount: number = 0.5): string {
     return `#${((1 << 24) + (r2 << 16) + (g2 << 8) + b2).toString(16).slice(1)}`;
 }
 
-export function highlightColor(hex: string, amount: number = 0.3): string {
+
+export function greyOutColor(hex: string, amount: number = 0.3): string {
     // Convert hex to RGB
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);

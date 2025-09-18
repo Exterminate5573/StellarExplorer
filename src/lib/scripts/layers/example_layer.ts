@@ -5,12 +5,11 @@ import { Upgrade } from "../interfaces/upgrade";
 export class ExampleLayer extends Layer {
 
     constructor(tree: any) {
-        super(tree, "example_layer", "#4002b4ff", true, new Decimal(10));
+        super(tree, "example_layer", "#250068ff", true);
     }
 
     public registerSubcomponents(): void {
-        console.log("Registering example upgrade");
-        this.subcomponents.push(
+        this.addComponentContainer(
             new Upgrade(
                 "example_upgrade",
                 new Decimal(1),
@@ -26,8 +25,12 @@ export class ExampleLayer extends Layer {
     public buyCurrency(): void {
         if (this.canBuyCurrency()) {
             this.tree.baseCurrency = new Decimal(0); //Full reset until more complex mechanics are added
-            this.currency = this.currency.plus(1);
+            this.currency = this.currency.plus(this.buyCurrencyGain());
         }
+    }
+
+    public buyCurrencyGain(): Decimal {
+        return new Decimal(1);
     }
 
     public currencyPerSecond(): Decimal {
@@ -36,9 +39,7 @@ export class ExampleLayer extends Layer {
 
     public reset(): void {
         this.currency = new Decimal(0);
-        this.subcomponents.forEach(c => {
-            c.reset();
-        });
+        this.getAllSubcomponents().forEach(c => c.reset());
         this.tree.reset();
     }
 }
