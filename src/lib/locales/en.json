@@ -14,15 +14,22 @@
         "settings": "Settings"
     },
     "game": {
-        "name": "Example Game"
+        "name": "Example Game",
+        "base_currency": {
+            "name": "Points",
+            "header": "You have {count} points",
+            "gaining": "You are gaining {rate} points per second"
+        }
     },
     "example_layer": {
-        "name": "Points",
-        "header": "You have {count} points",
-        "gaining": "You are gaining {rate} points per second",
+        "name": "Example Points",
+        "header": "You have {count} examples",
+        "gaining": "You are gaining {rate} examples per second",
+        "reset": "Reset for +{gain} example",
         "example_upgrade": {
             "name": "The Beginning",
-            "description": "Start generating points."
+            "description": "Start generating points.",
+            "cost": "{cost} examples"
         }
     }
 }

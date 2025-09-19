@@ -30,28 +30,15 @@ export class Upgrade extends GameComponent {
     }
 
     public getColor(): string {
-        if (!this.canAfford()) {
-            return greyOutColor(this.layer.color);
-        } else {
-            return this.layer.color;
-        }
+        return this.layer.getColor(false, !this.canAfford());
     }
 
     public getHoverColor(): string {
-        if (!this.canAfford()) {
-            return greyOutColor(this.layer.color, 0.8);
-        }
-        return highlightColor(this.layer.color, 0.8);
+        return this.layer.getColor(this.canAfford(), !this.canAfford(), 0.8);
     }
 
     public getBorderColor(): string {
-        if (!this.canAfford()) {
-            return greyOutColor(this.layer.color, 0.7);
-        } else if (!this.bought && this.canAfford()) {
-            return "#0dff00ff";
-        } else {
-            return highlightColor(this.layer.color);
-        }
+        return (!this.bought && this.canAfford()) ? "#0dff00ff" : this.layer.getColor(this.canAfford(), !this.canAfford());
     }
 
 }

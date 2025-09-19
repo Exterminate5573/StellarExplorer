@@ -1,6 +1,7 @@
 <script lang="ts">
     import { gameStore, game } from "$lib/scripts/game";
     import type { Upgrade } from "$lib/scripts/interfaces/upgrade";
+    import { formatNumber } from "$lib/scripts/utils/utils";
     import { t } from "svelte-i18n";
     import { derived } from "svelte/store";
 
@@ -21,6 +22,9 @@
     let borderColor = derived(upgrade, ($upgrade) => {
         return $upgrade.getBorderColor();
     });
+    let cost = derived(upgrade, ($upgrade) => {
+        return formatNumber($upgrade.cost);
+    });
 
     function buyUpgrade() {
         let layer = game.getCurrentLayer();
@@ -29,12 +33,12 @@
     }
 </script>
 
-<button class="btn" onclick={buyUpgrade} disabled={!$canAfford} 
+<button class="btn rounded-lg h-20" onclick={buyUpgrade} disabled={!$canAfford} 
     style="background-color: {$color}; border-color: {$borderColor}; border-width: 2px;">
 
-    <div class="flex flex-col items-start">
+    <div class="flex flex-col items-center">
         <span class="font-bold">{$t($upgrade.layer.layerID + "." + id + ".name")}</span>
         <span class="text-sm">{$t($upgrade.layer.layerID + "." + id + ".description")}</span>
-        <span class="text-sm">{$upgrade.cost}</span>
+        <span class="text-sm">{$t($upgrade.layer.layerID + "." + id + ".cost", { values: { cost: $cost}})}</span>
     </div>
 </button>
