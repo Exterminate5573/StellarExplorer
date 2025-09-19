@@ -16,12 +16,14 @@ export abstract class GameComponent {
     }
 
     public abstract reset(): void;
+    public abstract getSave(): JSON;
+    public abstract loadSave(obj: any): void;
 
     public update(diff: number): void {
         //Default does nothing
     }
 
     public getColor(): string {
-        return this.layer.color;
+        return this.layer.getColor();
     }
 }

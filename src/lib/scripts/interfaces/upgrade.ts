@@ -2,14 +2,13 @@ import type Decimal from "break_eternity.js";
 import { GameComponent } from "./game_component";
 import type { Layer } from "./layer";
 import UpgradeButton from "$lib/components/upgrade_button.svelte";
-import { greyOutColor, highlightColor } from "../utils/utils";
 
 export class Upgrade extends GameComponent {
 
     public bought: boolean = false;
     public cost: Decimal;
 
-    constructor(componentId: string, cost: Decimal, layer: Layer, unlocked?: boolean) {
+    constructor(componentId: string, layer: Layer, cost: Decimal, unlocked?: boolean) {
         super(componentId, layer, UpgradeButton, unlocked);
         this.cost = cost;
     }
@@ -30,15 +29,28 @@ export class Upgrade extends GameComponent {
     }
 
     public getColor(): string {
-        return this.layer.getColor(false, !this.canAfford());
+        return this.layer.getColor(this.bought, (!this.canAfford() && !this.bought));
     }
 
     public getHoverColor(): string {
-        return this.layer.getColor(this.canAfford(), !this.canAfford(), 0.8);
+        return this.layer.getColor((this.canAfford() || this.bought), (!this.canAfford() && !this.bought));
     }
 
     public getBorderColor(): string {
         return (!this.bought && this.canAfford()) ? "#0dff00ff" : this.layer.getColor(this.canAfford(), !this.canAfford());
+    }
+
+    public getSave(): JSON {
+        return {
+            componentId: this.componentId,
+            bought: this.bought
+        } as unknown as JSON;
+    }
+
+    public loadSave(obj: any): void {
+        if (obj.bought !== undefined) {
+            this.bought = obj.bought;
+        }
     }
 
 }

@@ -8,6 +8,10 @@
         return $game.getCurrentLayer();
     });
 
+    let canBuyCurrency = derived(layer, ($layer) => {
+        return $layer.canBuyCurrency();
+    });
+
     let currencyAmount = derived(layer, ($layer) => {
         return formatNumber($layer.currency);
     });
@@ -35,6 +39,8 @@
     let subcomponentContainers = derived(layer, ($layer) => {
         return $layer.getComponentContainers();
     });
+
+    let isHovered = $state(false);
 </script>
 
 <div class="layer-page text-center align-center flex flex-col">
@@ -43,9 +49,12 @@
     <p>{$t($layer.layerID + ".gaining", { values: { rate: $currencyGain } })}</p>
 
     <div class="reset-button my-8 flex justify-center">
-        <button class="btn btn-primary w-1/3 h-20 rounded-lg" on:click={() => $layer.buyCurrency()}
-            style="background-color: {$bgColor}; border-color: {$borderColor}; border-width: 2px; hover: {$hoverColor};">
+        <button class="btn btn-primary w-1/3 py-6 rounded-lg" onclick={() => $layer.buyCurrency()} disabled={!$canBuyCurrency}
+            onmouseenter={() => isHovered = true} onmouseleave={() => isHovered = false}
+            style="background-color: {(isHovered && $canBuyCurrency) ? $hoverColor : $bgColor}; border-color: {$borderColor}; border-width: 2px;">
             {$t($layer.layerID + ".reset", { values: { gain: $resetGain } })}
+            <br/>
+            {$t($layer.layerID + ".cost", { values: { cost: formatNumber($layer.currencyCost()) } })}
         </button>
     </div>
 
