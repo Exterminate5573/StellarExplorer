@@ -8,7 +8,7 @@ export class Upgrade extends GameComponent {
     public bought: boolean = false;
     public cost: Decimal;
 
-    constructor(componentId: string, layer: Layer, cost: Decimal, unlocked?: boolean) {
+    constructor(componentId: string, layer: Layer, cost: Decimal, unlocked?: () => boolean) {
         super(componentId, layer, UpgradeButton, unlocked);
         this.cost = cost;
     }

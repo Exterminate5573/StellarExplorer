@@ -4,15 +4,19 @@
     import { game, gameStore } from "$lib/scripts/game";
     import { settings } from "$lib/scripts/utils/settings.svelte";
     import { formatNumber } from "$lib/scripts/utils/utils";
-    import { onDestroy, onMount } from "svelte";
+    import { onMount } from "svelte";
     import { t } from 'svelte-i18n';
 
     let hoveredLayer: string | null = $state(null);
 
     onMount(() => {
         game.start();
+    });
 
-        window.addEventListener("beforeunload", settings.saveGame);
+    //This cant go in the settings file because it needs to be in a component
+    $effect(() => {
+        // Save settings whenever they change
+        settings.saveSettings();
     });
 </script>
 

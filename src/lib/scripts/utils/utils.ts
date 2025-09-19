@@ -3,17 +3,42 @@
 import Decimal from "break_eternity.js";
 import { settings } from "./settings.svelte";
 
+const scales = [
+            { value: 1e30, suffix: "No" },
+            { value: 1e27, suffix: "Oc" },
+            { value: 1e24, suffix: "Sx" },
+            { value: 1e21, suffix: "Qi" },
+            { value: 1e18, suffix: "Qa" },
+            { value: 1e15, suffix: "T" },
+            { value: 1e12, suffix: "B" },
+            { value: 1e9,  suffix: "M" },
+            { value: 1e6,  suffix: "K" },
+            { value: 1000, suffix: "" }
+        ];
+
 export function formatNumber(num: Decimal): string {
-    if (settings.notation === "standard") {
-        return num.toFixed(2);
-    } else if (settings.notation === "scientific") {
-        return num.toExponential(2);
-    } else if (settings.notation === "engineering") {
-        let exponent = num.log10().floor().div(3).floor().mul(3).toNumber();
-        let mantissa = num.div(new Decimal(10).pow(exponent));
-        return mantissa.toFixed(2) + "e" + exponent;
-    } else {
-        return num.toString();
+    switch (settings.notation) {
+        case "standard":
+            for (const scale of scales) {
+                if (num.gte(scale.value)) {
+                    return (num.div(scale.value)).toFixed(2) + scale.suffix;
+                }
+            }
+        default:
+        case "scientific":
+            if (num.lte(1000)) {
+                return num.toFixed(2);
+            } else {
+                return num.toExponential(2);
+            }
+        case "engineering":
+            if (num.lte(1000)) {
+                return num.toFixed(2);
+            } else {
+                let exponent = num.log10().floor().div(3).floor().mul(3).toNumber();
+                let mantissa = num.div(new Decimal(10).pow(exponent));
+                return mantissa.toFixed(2) + "e" + exponent;
+            }
     }
 }
 

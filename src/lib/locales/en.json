@@ -18,6 +18,10 @@
     "currentAmount": "Current Amount: {amount}",
     "gainAmount": "Gaining {gain}/s "
   },
+  "milestone": {
+    "achieved": "Completed",
+    "unachieved": "Not Completed"
+  },
   "game": {
     "name": "Example Game",
     "base_currency": {
@@ -43,6 +47,11 @@
       "cost": "Costs: {cost} examples",
       "amount": "You have {amount}",
       "effect": "Generates {effect} points per second."
+    },
+    "example_milestone": {
+      "name": "First Steps",
+      "description": "Unlock the ability to buy Point Generators.",
+      "requirement": "Requires 5 Examples"
     }
   }
 }

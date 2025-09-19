@@ -14,7 +14,6 @@ class Settings {
 
         this.language = $state("en");
         this.notation = $state("standard");
-
     }
 
     public saveSettings() {

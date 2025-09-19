@@ -2,6 +2,7 @@ import Decimal from "break_eternity.js";
 import { Layer } from "../interfaces/layer";
 import { Upgrade } from "../interfaces/upgrade";
 import { Buyable } from "../interfaces/buyable";
+import { Milestone } from "../interfaces/milestone";
 
 export class ExampleLayer extends Layer {
 
@@ -24,7 +25,16 @@ export class ExampleLayer extends Layer {
                 "example_buyable",
                 this,
                 //@ts-ignore
-                function() { return new Decimal(10).times(Decimal.pow(2, this.amount.toNumber())); }
+                function() { return new Decimal(10).times(Decimal.pow(2, this.amount.toNumber())); },
+                () => this.getSubcomponentByID("example_milestone")?.achieved === true
+            )
+        );
+
+        this.addComponentContainer(
+            new Milestone(
+                "example_milestone",
+                this,
+                () => this.currency.gte(5)
             )
         );
     }

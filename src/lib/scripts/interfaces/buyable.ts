@@ -8,7 +8,7 @@ export class Buyable extends GameComponent {
     public amount: Decimal;
     public cost: () => Decimal;
 
-    constructor(componentId: string, layer: Layer, cost: () => Decimal, unlocked?: boolean) {
+    constructor(componentId: string, layer: Layer, cost: () => Decimal, unlocked?: () => boolean) {
         super(componentId, layer, BuyableButton, unlocked);
         this.amount = new Decimal(0);
         this.cost = cost;
