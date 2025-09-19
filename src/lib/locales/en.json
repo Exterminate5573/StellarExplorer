@@ -1,35 +1,41 @@
 {
-    "settings": {
-        "title": "Settings",
-        "description": "Adjust your preferences and configurations here.",
-        "language": "Language",
-        "notation": {
-            "title": "Number Notation",
-            "standard": "Standard",
-            "scientific": "Scientific",
-            "engineering": "Engineering"
-        }
-    },
-    "sidebar": {
-        "settings": "Settings"
-    },
-    "game": {
-        "name": "Example Game",
-        "base_currency": {
-            "name": "Points",
-            "header": "You have {count} points",
-            "gaining": "You are gaining {rate} points per second"
-        }
-    },
-    "example_layer": {
-        "name": "Example Points",
-        "header": "You have {count} examples",
-        "gaining": "You are gaining {rate} examples per second",
-        "reset": "Reset for +{gain} example",
-        "example_upgrade": {
-            "name": "The Beginning",
-            "description": "Start generating points.",
-            "cost": "{cost} examples"
-        }
+  "settings": {
+    "title": "Settings",
+    "description": "Adjust your preferences and configurations here.",
+    "language": "Language",
+    "notation": {
+      "title": "Number Notation",
+      "standard": "Standard",
+      "scientific": "Scientific",
+      "engineering": "Engineering"
     }
+  },
+  "sidebar": {
+    "settings": "Settings"
+  },
+  "status": {
+    "name": "Statistics",
+    "currentAmount": "Current Amount: {amount}",
+    "gainAmount": "Gaining {gain}/s "
+  },
+  "game": {
+    "name": "Example Game",
+    "base_currency": {
+      "name": "Points",
+      "header": "You have {count} points",
+      "gaining": "You are gaining {rate} points per second"
+    }
+  },
+  "example_layer": {
+    "name": "Example Points",
+    "header": "You have {count} examples",
+    "gaining": "You are gaining {rate} examples per second",
+    "reset": "Reset for +{gain} example",
+    "cost": "Cost: {cost} points",
+    "example_upgrade": {
+      "name": "The Beginning",
+      "description": "Start generating points.",
+      "cost": "{cost} examples"
+    }
+  }
 }

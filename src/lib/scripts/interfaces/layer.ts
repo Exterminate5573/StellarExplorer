@@ -11,12 +11,14 @@ export abstract class Layer {
     private color: string;
     public currency: Decimal;
     public unlocked: boolean;
+    private parentLayer: string;
 
     private subcomponents: ComponentContainer[] = [];
 
-    constructor(tree: Tree, id: string, color?: string, unlocked?: boolean, initialCurrency?: Decimal) {
+    constructor(tree: Tree, id: string, parentLayer?: string, color?: string, unlocked?: boolean, initialCurrency?: Decimal) {
         this.tree = tree;
         this.layerID = id;
+        this.parentLayer = parentLayer;
         this.color = color ?? "#FFFFFF";
         this.unlocked = unlocked ?? false;
         this.currency = initialCurrency ?? new Decimal(0);
@@ -24,11 +26,15 @@ export abstract class Layer {
     }
     public abstract registerSubcomponents(): void;
     
-    public abstract canBuyCurrency(): boolean;
+    public abstract currencyCost(): Decimal;
     public abstract buyCurrencyGain(): Decimal;
     public abstract buyCurrency(): void;
     public abstract currencyPerSecond(): Decimal;
     public abstract reset(): void;
+
+    public canBuyCurrency(): boolean {
+        return this.tree.getLayer(this.parentLayer)?.currency.gte(this.currencyCost()) ?? false;
+    }
     
     protected addComponentContainer(... components: GameComponent[]): void {
         this.subcomponents.push(new ComponentContainer(components));

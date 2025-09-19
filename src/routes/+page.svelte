@@ -3,6 +3,7 @@
     import SettingsPage from "$lib/pages/settings_page.svelte";
     import { game, gameStore } from "$lib/scripts/game";
     import { settings } from "$lib/scripts/interfaces/settings.svelte";
+    import { formatNumber } from "$lib/scripts/utils/utils";
     import { onDestroy, onMount } from "svelte";
     import { t } from 'svelte-i18n';
 
@@ -79,5 +80,26 @@
         {:else}
             <LayerPage />
         {/if}
+    </div>
+
+    <!-- Status bar -->
+    <div class="flex bg-neutral-700 h-full w-64 items-center flex-col">
+        <h1 class="text-2xl font-bold p-4 whitespace-nowrap">{$t("status.name")}</h1>
+        <div class="flex-1 overflow-y-auto w-full p-4">
+            <div class="mb-4 p-4 bg-neutral-600 rounded-lg">
+                <h2 class="text-xl font-semibold mb-2">{$t("game.base_currency.name")}</h2>
+                <p class="mt-2">{$t("status.currentAmount", { values: { amount: formatNumber($gameStore.tree.baseCurrency) } })}</p>
+                <p>{$t("status.gainAmount", { values: { gain: formatNumber($gameStore.tree.currencyPerSecond()) } })}</p>
+            </div>
+            {#each $gameStore.tree.tree as layer (layer.layerID)}
+                {#if layer.unlocked}
+                    <div class="mb-4 p-4 bg-neutral-600 rounded-lg">
+                        <h2 class="text-xl font-semibold mb-2">{$t(layer.layerID + ".name")}</h2>
+                        <p class="mt-2">{$t("status.currentAmount", { values: { amount: formatNumber(layer.getCurrency()) } })}</p>
+                        <p>{$t("status.gainAmount", { values: { gain: formatNumber(layer.currencyPerSecond()) } })}</p>
+                    </div>
+                {/if}
+            {/each}
+        </div>
     </div>
 </div>

@@ -5,7 +5,7 @@ import { Upgrade } from "../interfaces/upgrade";
 export class ExampleLayer extends Layer {
 
     constructor(tree: any) {
-        super(tree, "example_layer", "#250068ff", true);
+        super(tree, "example_layer", undefined, "#250068ff", true);
     }
 
     public registerSubcomponents(): void {
@@ -18,8 +18,13 @@ export class ExampleLayer extends Layer {
         );
     }
     
+    public currencyCost(): Decimal {
+        return this.currency.times(2).plus(10);
+    }
+    
+    //Overrides the default canBuyCurrency method to use base currency
     public canBuyCurrency(): boolean {
-        return this.tree.baseCurrency.gte(this.currency.times(5).plus(1));
+        return this.tree.baseCurrency.gte(this.currencyCost());
     }
 
     public buyCurrency(): void {

@@ -22,6 +22,6 @@ export abstract class GameComponent {
     }
 
     public getColor(): string {
-        return this.layer.color;
+        return this.layer.getColor();
     }
 }
