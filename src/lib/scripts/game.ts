@@ -4,6 +4,7 @@ import type { Tree } from "./interfaces/tree";
 import { ExampleTree } from "./example_tree";
 import { derived, writable } from "svelte/store";
 import type { Layer } from "./interfaces/layer";
+import { onMount } from "svelte";
 
 class Game {
     public version: string;
@@ -42,7 +43,10 @@ class Game {
             this.stateUpdated();
         }, 50);
 
-        // Save settings and game every minute
+        // Save game when the window is closed or refreshed
+        window.addEventListener("beforeunload", settings.saveGame);
+
+        // Save and game every minute
         setInterval(() => {
             settings.saveGame();
         }, 60000);

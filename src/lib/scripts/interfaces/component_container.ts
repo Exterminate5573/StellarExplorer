@@ -11,7 +11,7 @@ export class ComponentContainer {
     }
 
     public getActiveComponents(): GameComponent[] {
-        return this.components.filter(c => c.unlocked);
+        return this.components.filter(c => c.unlocked());
     }
 
 }

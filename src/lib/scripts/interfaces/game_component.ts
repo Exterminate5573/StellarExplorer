@@ -4,15 +4,15 @@ import type { Layer } from "./layer";
 export abstract class GameComponent {
 
     public componentId: string;
-    public unlocked: boolean;
+    public unlocked: () => boolean;
     public layer: Layer;
     public svelteComponent: Component<any>;
 
-    constructor(componentId: string, layer: Layer, svelteComponent: Component<any>, unlocked?: boolean) {
+    constructor(componentId: string, layer: Layer, svelteComponent: Component<any>, unlocked?: () => boolean) {
         this.componentId = componentId;
         this.layer = layer;
         this.svelteComponent = svelteComponent;
-        this.unlocked = unlocked ?? true;
+        this.unlocked = unlocked ?? (() => true);
     }
 
     public abstract reset(): void;

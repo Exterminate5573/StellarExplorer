@@ -41,14 +41,14 @@
 </script>
 
 {#if $upgrade}
-<button class="btn rounded-lg p-1" onclick={buyUpgrade} disabled={!$canAfford} 
+<button class="upg-btn rounded-lg p-1" onclick={buyUpgrade} disabled={!$canAfford} 
     onmouseenter={() => isHovered = true} onmouseleave={() => isHovered = false}
     style="background-color: {isHovered ? $hoverColor : $color}; border-color: {$borderColor}; border-width: 2px;">
 
     <div class="flex flex-col items-center">
-        <span class="font-bold">{$t($upgrade.layer.layerID + "." + id + ".name")}</span>
-        <span class="text-sm">{$t($upgrade.layer.layerID + "." + id + ".description")}</span>
-        <span class="text-sm">{$t($upgrade.layer.layerID + "." + id + ".cost", { values: { cost: $cost}})}</span>
+        <span class="font-bold">{$t(`${$upgrade.layer.layerID}.${id}.name`)}</span>
+        <span class="text-sm">{$t(`${$upgrade.layer.layerID}.${id}.description`)}</span>
+        <span class="text-sm">{$t(`${$upgrade.layer.layerID}.${id}.cost`, { values: { cost: $cost}})}</span>
     </div>
 </button>
 {/if}

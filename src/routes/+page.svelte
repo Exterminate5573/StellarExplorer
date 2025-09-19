@@ -1,22 +1,27 @@
 <script lang="ts">
+    import AchievementTile from "$lib/components/achievement_tile.svelte";
     import LayerPage from "$lib/pages/layer_page.svelte";
     import SettingsPage from "$lib/pages/settings_page.svelte";
     import { game, gameStore } from "$lib/scripts/game";
     import { settings } from "$lib/scripts/utils/settings.svelte";
     import { formatNumber } from "$lib/scripts/utils/utils";
-    import { onDestroy, onMount } from "svelte";
+    import { onMount } from "svelte";
     import { t } from 'svelte-i18n';
 
     let hoveredLayer: string | null = $state(null);
 
     onMount(() => {
         game.start();
+    });
 
-        window.addEventListener("beforeunload", settings.saveGame);
+    //This cant go in the settings file because it needs to be in a component
+    $effect(() => {
+        // Save settings whenever they change
+        settings.saveSettings();
     });
 </script>
 
-<div class="flex h-screen bg-neutral-800 text-white">
+<div class="flex h-screen bg-neutral-800 text-white overflow-hidden">
     <!-- Sidebar -->
     <div class={`bg-neutral-700 h-full shadow-md ${settings.sidebarExtended ? 'w-64' : 'w-16'} duration-300 relative`}>
         
@@ -80,24 +85,62 @@
         {/if}
     </div>
 
-    <!-- Status bar -->
-    <div class="flex bg-neutral-700 h-full w-64 items-center flex-col">
-        <h1 class="text-2xl font-bold p-4 whitespace-nowrap">{$t("status.name")}</h1>
-        <div class="flex-1 overflow-y-auto w-full p-4">
-            <div class="mb-4 p-4 bg-neutral-600 rounded-lg">
-                <h2 class="text-xl font-semibold mb-2">{$t("game.base_currency.name")}</h2>
-                <p class="mt-2">{$t("status.currentAmount", { values: { amount: formatNumber($gameStore.tree.baseCurrency) } })}</p>
-                <p>{$t("status.gainAmount", { values: { gain: formatNumber($gameStore.tree.currencyPerSecond()) } })}</p>
+    <!-- Statistics bar -->
+    <div class="flex bg-neutral-700 h-full w-64 relative items-center flex-col">
+        {#if settings.statsPageName === "statistics"}
+            <!-- TODO: Make this minimizable -->
+            <h1 class="text-2xl font-bold p-4 whitespace-nowrap">{$t("statistics.name")}</h1>
+            <div class="flex-1 overflow-y-auto w-full p-4">
+                <div class="mb-4 p-4 bg-neutral-600 rounded-lg">
+                    <h2 class="text-xl font-semibold mb-2">{$t("game.base_currency.name")}</h2>
+                    <p class="mt-2">{$t("statistics.currentAmount", { values: { amount: formatNumber($gameStore.tree.baseCurrency) } })}</p>
+                    <p>{$t("statistics.gainAmount", { values: { gain: formatNumber($gameStore.tree.currencyPerSecond()) } })}</p>
+                </div>
+                {#each $gameStore.tree.tree as layer (layer.layerID)}
+                    {#if layer.unlocked}
+                        <div class="mb-4 p-4 bg-neutral-600 rounded-lg">
+                            <h2 class="text-xl font-semibold mb-2">{$t(layer.layerID + ".name")}</h2>
+                            <p class="mt-2">{$t("statistics.currentAmount", { values: { amount: formatNumber(layer.getCurrency()) } })}</p>
+                            <p>{$t("statistics.gainAmount", { values: { gain: formatNumber(layer.currencyPerSecond()) } })}</p>
+                        </div>
+                    {/if}
+                {/each}
             </div>
-            {#each $gameStore.tree.tree as layer (layer.layerID)}
-                {#if layer.unlocked}
-                    <div class="mb-4 p-4 bg-neutral-600 rounded-lg">
-                        <h2 class="text-xl font-semibold mb-2">{$t(layer.layerID + ".name")}</h2>
-                        <p class="mt-2">{$t("status.currentAmount", { values: { amount: formatNumber(layer.getCurrency()) } })}</p>
-                        <p>{$t("status.gainAmount", { values: { gain: formatNumber(layer.currencyPerSecond()) } })}</p>
-                    </div>
-                {/if}
-            {/each}
+        {:else if settings.statsPageName === "achievements"}
+            <h1 class="text-2xl font-bold p-4 whitespace-nowrap">{$t("achievements.name")}</h1>
+            <p class="whitespace-nowrap text-center">
+                {$t("achievements.amount_ln1")} 
+                <br/>
+                { $gameStore.tree.comletedAchievementsCount() } / { $gameStore.tree.achievements.length } 
+                <br/>
+                {$t("achievements.amount_ln2")}
+            </p>
+            <div class="flex-1 overflow-y-auto w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                {#each $gameStore.tree.achievements as achievement}
+                    <AchievementTile id={achievement.id} />
+                {/each}
+            </div>
+        {/if}
+        
+        <!-- Pages -->
+        <div class="absolute bottom-0 w-full flex flex-row items-center">
+            <button class="align-left p-4 hover:bg-neutral-600 flex-1" aria-label="Statistics" onclick={() => settings.statsPageName = "statistics"}
+                style="{settings.statsPageName === 'statistics' ? 'box-shadow: inset 0 -4px 0 0 white;' : ''}">
+                <div class="flex justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512a9.025 9.025 0 015.488 5.488z" />
+                    </svg>
+                </div>
+            </button>
+            <button class="align-left p-4 hover:bg-neutral-600 flex-1" aria-label="Achievements" onclick={() => settings.statsPageName = "achievements"}
+                style="{settings.statsPageName === 'achievements' ? 'box-shadow: inset 0 -4px 0 0 white;' : ''}">
+                <div class="flex justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M11 19v-3.1q-1.225-.275-2.187-1.037T7.4 12.95q-1.875-.225-3.137-1.637T3 8V7q0-.825.588-1.412T5 5h2q0-.825.588-1.412T9 3h6q.825 0 1.413.588T17 5h2q.825 0 1.413.588T21 7v1q0 1.9-1.263 3.313T16.6 12.95q-.45 1.15-1.412 1.913T13 15.9V19h3q.425 0 .713.288T17 20t-.288.713T16 21H8q-.425 0-.712-.288T7 20t.288-.712T8 19zm-4-8.2V7H5v1q0 .95.55 1.713T7 10.8m5 3.2q1.25 0 2.125-.875T15 11V5H9v6q0 1.25.875 2.125T12 14m5-3.2q.9-.325 1.45-1.088T19 8V7h-2zm-5-1.3" />
+                    </svg>
+                </div>
+            </button>
         </div>
     </div>
 </div>

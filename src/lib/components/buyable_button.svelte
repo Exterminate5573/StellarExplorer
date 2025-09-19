@@ -10,7 +10,7 @@
 
     let buyable = derived(gameStore, ($game) => {
         let layer = $game.getCurrentLayer() as Layer;
-        let buyable = layer.getSubcomponentByID(id) as Buyable | undefined; //TODO: This is undefined when swapping layers, fix it
+        let buyable = layer.getSubcomponentByID(id) as Buyable | undefined;
         return buyable;
     });
 
@@ -48,15 +48,15 @@
 </script>
 
 {#if $buyable}
-<button class="btn rounded-lg p-1" onclick={buy} disabled={!$canAfford} 
+<button class="buyable-btn rounded-lg p-1" onclick={buy} disabled={!$canAfford} 
     onmouseenter={() => isHovered = true} onmouseleave={() => isHovered = false}
     style="background-color: {isHovered ? $hoverColor : $color}; border-color: {$borderColor}; border-width: 2px;">
 
     <div class="flex flex-col items-center">
-        <span class="font-bold">{$t($buyable.layer.layerID + "." + id + ".name")}</span>
-        <span class="text-sm">{$t($buyable.layer.layerID + "." + id + ".description")}</span>
-        <span class="text-sm">{$t($buyable.layer.layerID + "." + id + ".amount", { values: { amount: $amount}})}</span>
-        <span class="text-sm">{$t($buyable.layer.layerID + "." + id + ".cost", { values: { cost: $cost}})}</span>
+        <span class="font-bold">{$t(`${$buyable.layer.layerID}.${id}.name`)}</span>
+        <span class="text-sm">{$t(`${$buyable.layer.layerID}.${id}.description`)}</span>
+        <span class="text-sm">{$t(`${$buyable.layer.layerID}.${id}.amount`, { values: { amount: $amount}})}</span>
+        <span class="text-sm">{$t(`${$buyable.layer.layerID}.${id}.cost`, { values: { cost: $cost}})}</span>
     </div>
 </button>
 {/if}
