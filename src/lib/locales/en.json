@@ -13,7 +13,7 @@
   "sidebar": {
     "settings": "Settings"
   },
-  "status": {
+  "statistics": {
     "name": "Statistics",
     "currentAmount": "Current Amount: {amount}",
     "gainAmount": "Gaining {gain}/s "
@@ -28,6 +28,21 @@
       "name": "Points",
       "header": "You have {count} points",
       "gaining": "You are gaining {rate} points per second"
+    }
+  },
+  "achievements": {
+    "name": "Achievements",
+    "amount_ln1": "You have completed",
+    "amount_ln2": "achievements",
+    "locked": "Locked",
+    "locked_desc": "You haven't unlocked this achievement yet.",
+    "example_achievement": {
+      "name": "Getting Started",
+      "description": "Reach 100 points."
+    },
+    "example_hidden_achievement": {
+      "name": "Secret Achievement",
+      "description": "This is a hidden achievement."
     }
   },
   "example_layer": {

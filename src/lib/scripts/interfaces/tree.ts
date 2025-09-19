@@ -1,20 +1,32 @@
 import Decimal from "break_eternity.js";
 import type { Layer } from "./layer";
+import type { Achievement } from "./achievement";
 
 export abstract class Tree {
 
     public baseCurrency: Decimal;
     public tree: Layer[];
+    public achievements: Achievement[] = [];
 
     constructor(baseCurrency: Decimal) {
         this.baseCurrency = baseCurrency;
         this.tree = this.createTree();
+        this.achievements = this.createAchievements();
     }
 
     public abstract createTree(): Layer[];
+    public abstract createAchievements(): Achievement[];
 
     public getLayer(layerId: string): Layer | undefined {
         return this.tree.find(layer => layer.layerID === layerId);
+    }
+
+    public getAchievement(achievementId: string): Achievement | undefined {
+        return this.achievements.find(achievement => achievement.id === achievementId);
+    }
+    
+    public comletedAchievementsCount(): number {
+        return this.achievements.filter(achievement => achievement.isCompleted()).length;
     }
     
     public abstract currencyPerSecond(): Decimal;

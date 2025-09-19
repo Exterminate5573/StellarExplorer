@@ -26,7 +26,7 @@
 </script>
 
 {#if $milestone}
-<div class="rounded-lg p-1" >
+<div class="milestone-tile rounded-lg p-1" >
     <div class="flex flex-col items-center" 
         style="background-color: {$achieved ? $color : 'gray'}; border-color: {$borderColor}; border-width: 2px;">
         <span class="font-bold">{$t(`${$milestone.layer.layerID}.${id}.name`)}</span>

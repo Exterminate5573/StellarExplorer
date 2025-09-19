@@ -2,6 +2,7 @@ import Decimal from "break_eternity.js";
 import { Tree } from "./interfaces/tree";
 import { ExampleLayer } from "./layers/example_layer";
 import type { Layer } from "./interfaces/layer";
+import  { Achievement } from "./interfaces/achievement";
 
 export class ExampleTree extends Tree {
 
@@ -12,6 +13,20 @@ export class ExampleTree extends Tree {
     public createTree(): Layer[] {
         return [
             new ExampleLayer(this)
+        ];
+    }
+
+    public createAchievements(): Achievement[] {
+        return [
+            new Achievement(
+                "example_achievement", 
+                () => this.baseCurrency.gte(100)
+            ),
+            new Achievement(
+                "example_hidden_achievement", 
+                () => this.baseCurrency.gte(1000), 
+                () => this.baseCurrency.gte(500)
+            )
         ];
     }
 

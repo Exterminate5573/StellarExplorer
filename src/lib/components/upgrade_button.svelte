@@ -42,7 +42,7 @@
 </script>
 
 {#if $upgrade}
-<button class="btn rounded-lg p-1" onclick={buyUpgrade} disabled={!$canAfford} 
+<button class="upg-btn rounded-lg p-1" onclick={buyUpgrade} disabled={!$canAfford} 
     onmouseenter={() => isHovered = true} onmouseleave={() => isHovered = false}
     style="background-color: {isHovered ? $hoverColor : $color}; border-color: {$borderColor}; border-width: 2px;">
 

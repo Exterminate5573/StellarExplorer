@@ -3,14 +3,16 @@ import { game } from "../game";
 class Settings {
 
     sidebarExtended: boolean;
-    currentPageName: string; //TODO
+    currentPageName: string;
+    statsPageName: string;
 
     language: string;
     notation: "standard" | "scientific" | "engineering" | undefined;
 
     constructor() {
         this.sidebarExtended = $state(true);
-        this.currentPageName = $state('settings'); //TODO
+        this.currentPageName = $state('settings');
+        this.statsPageName = $state('statistics');
 
         this.language = $state("en");
         this.notation = $state("standard");
@@ -20,6 +22,7 @@ class Settings {
         let jsonify = JSON.stringify({
             sidebarExtended: this.sidebarExtended,
             currentPageName: this.currentPageName,
+            statsPageName: this.statsPageName,
             language: this.language,
             notation: this.notation
         })
@@ -34,6 +37,7 @@ class Settings {
             let obj = JSON.parse(jsonify);
             this.sidebarExtended = obj.sidebarExtended ?? this.sidebarExtended;
             this.currentPageName = obj.currentPageName ?? this.currentPageName;
+            this.statsPageName = obj.statsPageName ?? this.statsPageName;
             this.language = obj.language ?? this.language;
             this.notation = obj.notation ?? this.notation;
         }

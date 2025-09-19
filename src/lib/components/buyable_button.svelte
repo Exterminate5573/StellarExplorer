@@ -48,7 +48,7 @@
 </script>
 
 {#if $buyable}
-<button class="btn rounded-lg p-1" onclick={buy} disabled={!$canAfford} 
+<button class="buyable-btn rounded-lg p-1" onclick={buy} disabled={!$canAfford} 
     onmouseenter={() => isHovered = true} onmouseleave={() => isHovered = false}
     style="background-color: {isHovered ? $hoverColor : $color}; border-color: {$borderColor}; border-width: 2px;">
 
