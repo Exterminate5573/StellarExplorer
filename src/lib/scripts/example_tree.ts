@@ -24,7 +24,14 @@ export class ExampleTree extends Tree {
         //Return 1 currency per second
         let cps = new Decimal(1);
 
-        cps = cps.plus(this.getLayer("example_layer")?.currency.div(5) ?? 0);
+        for (const layer of this.tree) {
+            cps = layer.getBaseEffect(cps);
+        }
+
+        //Softcaps
+        if (cps.gt(1000)) {
+            cps = cps.sqrt().times(Math.sqrt(10));
+        }
 
         return cps;
     }

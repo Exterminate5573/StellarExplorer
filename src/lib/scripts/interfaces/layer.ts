@@ -11,7 +11,7 @@ export abstract class Layer {
     private color: string;
     public currency: Decimal;
     public unlocked: boolean;
-    private parentLayer: string;
+    private parentLayer?: string;
 
     private subcomponents: ComponentContainer[] = [];
 
@@ -32,7 +32,16 @@ export abstract class Layer {
     public abstract currencyPerSecond(): Decimal;
     public abstract reset(): void;
 
+    //Overridable method for layers to affect the base currency gain
+    public getBaseEffect(cps: Decimal): Decimal {
+        //By default, layers have no effect on the base currency gain
+        return cps;
+    }
+
     public canBuyCurrency(): boolean {
+        if (!this.parentLayer) {
+            return false;
+        }
         return this.tree.getLayer(this.parentLayer)?.currency.gte(this.currencyCost()) ?? false;
     }
     
@@ -68,5 +77,32 @@ export abstract class Layer {
 
     public getColor(highlight: boolean = false, greyOut: boolean = false, amount?: number): string {
         return greyOut ? greyOutColor(this.color, amount) : (highlight ? highlightColor(this.color, amount) : this.color);
+    }
+
+    public getSave(): JSON {
+        return {
+            layerID: this.layerID,
+            currency: this.currency,
+            unlocked: this.unlocked,
+            subcomponents: this.subcomponents.flatMap(c => c.components).map(c => c.getSave())
+        } as unknown as JSON;
+    }
+
+    public loadSave(obj: any): void {
+        if (obj.currency) {
+            this.currency = new Decimal(obj.currency);
+        }
+        if (obj.unlocked !== undefined) {
+            this.unlocked = obj.unlocked;
+        }
+        if (obj.subcomponents) {
+            for (const compObj of obj.subcomponents) {
+                if (!compObj.componentId) continue;
+                const comp = this.getSubcomponentByID(compObj.componentId);
+                if (comp) {
+                    comp.loadSave(compObj);
+                }
+            }
+        }
     }
 }

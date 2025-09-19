@@ -8,7 +8,7 @@ export class Upgrade extends GameComponent {
     public bought: boolean = false;
     public cost: Decimal;
 
-    constructor(componentId: string, cost: Decimal, layer: Layer, unlocked?: boolean) {
+    constructor(componentId: string, layer: Layer, cost: Decimal, unlocked?: boolean) {
         super(componentId, layer, UpgradeButton, unlocked);
         this.cost = cost;
     }
@@ -38,6 +38,19 @@ export class Upgrade extends GameComponent {
 
     public getBorderColor(): string {
         return (!this.bought && this.canAfford()) ? "#0dff00ff" : this.layer.getColor(this.canAfford(), !this.canAfford());
+    }
+
+    public getSave(): JSON {
+        return {
+            componentId: this.componentId,
+            bought: this.bought
+        } as unknown as JSON;
+    }
+
+    public loadSave(obj: any): void {
+        if (obj.bought !== undefined) {
+            this.bought = obj.bought;
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 import Decimal from "break_eternity.js";
 import { Layer } from "../interfaces/layer";
 import { Upgrade } from "../interfaces/upgrade";
+import { Buyable } from "../interfaces/buyable";
 
 export class ExampleLayer extends Layer {
 
@@ -12,8 +13,18 @@ export class ExampleLayer extends Layer {
         this.addComponentContainer(
             new Upgrade(
                 "example_upgrade",
+                this,
                 new Decimal(1),
-                this
+            )
+        );
+
+        this.addComponentContainer(
+            //TODO: Fix ts-ignore
+            new Buyable(
+                "example_buyable",
+                this,
+                //@ts-ignore
+                function() { return new Decimal(10).times(Decimal.pow(2, this.amount.toNumber())); }
             )
         );
     }
@@ -40,6 +51,16 @@ export class ExampleLayer extends Layer {
 
     public currencyPerSecond(): Decimal {
         return new Decimal(0);
+    }
+
+    public getBaseEffect(cps: Decimal): Decimal {
+        cps = cps.plus(this.currency.times(0.1));
+
+        if (this.getSubcomponentByID("example_buyable")?.amount.gt(0)) {
+            cps = cps.times(this.getSubcomponentByID("example_buyable").amount.pow(0.7).plus(1));
+        }
+
+        return cps;
     }
 
     public reset(): void {

@@ -17,6 +17,13 @@
     let canAfford = derived(upgrade, ($upgrade) => {
         return $upgrade?.canAfford();
     });
+    
+    let cost = derived(upgrade, ($upgrade) => {
+        return $upgrade ? formatNumber($upgrade.cost) : "N/A";
+    });
+
+    let isHovered = $state(false);
+
     let color = derived(upgrade, ($upgrade) => {
         return $upgrade?.getColor();
     });
@@ -26,15 +33,10 @@
     let hoverColor = derived(upgrade, ($upgrade) => {
         return $upgrade?.getHoverColor();
     });
-    let cost = derived(upgrade, ($upgrade) => {
-        return $upgrade ? formatNumber($upgrade.cost) : "N/A";
-    });
-
-    let isHovered = $state(false);
 
     function buyUpgrade() {
         let layer = game.getCurrentLayer();
-        let upgrade = layer.getSubcomponentByID(id) as Upgrade;
+        let upgrade = layer.getSubcomponentByID(id) as Upgrade | undefined;
         upgrade?.buy();
     }
 </script>

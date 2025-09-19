@@ -1,5 +1,5 @@
 import SettingsPage from "$lib/pages/settings_page.svelte";
-import { settings } from "./interfaces/settings.svelte";
+import { settings } from "./utils/settings.svelte";
 import type { Tree } from "./interfaces/tree";
 import { ExampleTree } from "./example_tree";
 import { derived, writable } from "svelte/store";
@@ -24,6 +24,7 @@ class Game {
         settings.loadSettings();
 
         // Load game save
+        settings.loadGame();
 
         // Start the game loop
         setInterval(() => {
@@ -40,6 +41,11 @@ class Game {
 
             this.stateUpdated();
         }, 50);
+
+        // Save settings and game every minute
+        setInterval(() => {
+            settings.saveGame();
+        }, 60000);
     }
 
     // This function is called every game tick (default is 50ms)
@@ -53,6 +59,28 @@ class Game {
 
     public getCurrentLayer(): Layer {
         return this.tree.getLayer(settings.currentPageName) ?? this.tree.tree[0];
+    }
+
+    public getSave(): JSON {
+        return {
+            version: this.version,
+            lastUpdate: this.lastUpdate,
+            tree: this.tree.getSave()
+        } as unknown as JSON;
+    }
+
+    public loadSave(save: any): void {
+        if (save.version) {
+            if (save.version !== this.version) {
+                //Handle version differences here
+            }
+        }
+        if (save.lastUpdate) {
+            this.lastUpdate = save.lastUpdate;
+        }
+        if (save.tree) {
+            this.tree.loadSave(save.tree);
+        }
     }
 
 }

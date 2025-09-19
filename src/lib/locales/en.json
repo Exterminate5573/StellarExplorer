@@ -36,6 +36,13 @@
       "name": "The Beginning",
       "description": "Start generating points.",
       "cost": "{cost} examples"
+    },
+    "example_buyable": {
+      "name": "Point Generator",
+      "description": "Generate more points per second.",
+      "cost": "Costs: {cost} examples",
+      "amount": "You have {amount}",
+      "effect": "Generates {effect} points per second."
     }
   }
 }

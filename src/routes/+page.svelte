@@ -2,7 +2,7 @@
     import LayerPage from "$lib/pages/layer_page.svelte";
     import SettingsPage from "$lib/pages/settings_page.svelte";
     import { game, gameStore } from "$lib/scripts/game";
-    import { settings } from "$lib/scripts/interfaces/settings.svelte";
+    import { settings } from "$lib/scripts/utils/settings.svelte";
     import { formatNumber } from "$lib/scripts/utils/utils";
     import { onDestroy, onMount } from "svelte";
     import { t } from 'svelte-i18n';
@@ -15,6 +15,7 @@
 
     onDestroy(() => {
         //TODO: Add any cleanup logic if necessary
+        settings.saveGame();
     });
 </script>
 

@@ -1,7 +1,7 @@
 //------------------------------------------------
 
 import Decimal from "break_eternity.js";
-import { settings } from "../interfaces/settings.svelte";
+import { settings } from "./settings.svelte";
 
 export function formatNumber(num: Decimal): string {
     if (settings.notation === "standard") {
