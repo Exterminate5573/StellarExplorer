@@ -11,11 +11,8 @@
 
     onMount(() => {
         game.start();
-    });
 
-    onDestroy(() => {
-        //TODO: Add any cleanup logic if necessary
-        settings.saveGame();
+        window.addEventListener("beforeunload", settings.saveGame);
     });
 </script>
 
