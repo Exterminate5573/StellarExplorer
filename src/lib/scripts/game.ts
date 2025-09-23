@@ -1,10 +1,8 @@
-import SettingsPage from "$lib/pages/settings_page.svelte";
 import { settings } from "./utils/settings.svelte";
 import type { Tree } from "./interfaces/tree";
 import { ExampleTree } from "./example_tree";
-import { derived, writable } from "svelte/store";
+import { writable } from "svelte/store";
 import type { Layer } from "./interfaces/layer";
-import { onMount } from "svelte";
 
 class Game {
     public version: string;

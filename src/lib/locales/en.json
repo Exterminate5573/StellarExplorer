@@ -23,11 +23,11 @@
     "unachieved": "Not Completed"
   },
   "game": {
-    "name": "Example Game",
+    "name": "Stellar Explorer",
     "base_currency": {
-      "name": "Points",
-      "header": "You have {count} points",
-      "gaining": "You are gaining {rate} points per second"
+      "name": "Minerals",
+      "header": "You have {count} minerals",
+      "gaining": "You are gaining {rate} minerals per second"
     }
   },
   "achievements": {
@@ -45,28 +45,33 @@
       "description": "This is a hidden achievement."
     }
   },
-  "example_layer": {
-    "name": "Example Points",
-    "header": "You have {count} examples",
-    "gaining": "You are gaining {rate} examples per second",
-    "reset": "Reset for +{gain} example",
-    "cost": "Cost: {cost} points",
-    "example_upgrade": {
-      "name": "The Beginning",
-      "description": "Start generating points.",
-      "cost": "{cost} examples"
+  "mining_layer": {
+    "name": "Cash",
+    "header": "You have {count} cash",
+    "gaining": "You are gaining {rate} cash per second",
+    "reset": "Reset for +{gain} cash",
+    "cost": "Cost: {cost} minerals",
+    "stronger_pickaxes": {
+      "name": "Stronger Pickaxes",
+      "description": "Increases mineral gain based on cash you have.",
+      "cost": "{cost} cash"
     },
-    "example_buyable": {
-      "name": "Point Generator",
-      "description": "Generate more points per second.",
-      "cost": "Costs: {cost} examples",
+    "better_drills": {
+      "name": "Better Drills",
+      "description": "Doubles mineral gain.",
+      "cost": "{cost} cash"
+    },
+    "miners": {
+      "name": "Miners",
+      "description": "Increases mineral gain.",
+      "cost": "Costs: {cost} cash",
       "amount": "You have {amount}",
-      "effect": "Generates {effect} points per second."
+      "effect": "Generates {effect} minerals per second."
     },
-    "example_milestone": {
-      "name": "First Steps",
-      "description": "Unlock the ability to buy Point Generators.",
-      "requirement": "Requires 5 Examples"
+    "milestone_1": {
+      "name": "First Milestone",
+      "description": "No longer reset minerals when you gain cash.",
+      "requirement": "Reach 50 cash"
     }
   }
 }
