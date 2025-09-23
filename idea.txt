@@ -3,14 +3,14 @@ ideas cuz google docs is blocked
 progession
 Phase 1 launch ships into space
 
-mining ores start wit h1 free drill
+mining ores start with free drill
 use ores to make more drills
 unlock ore refinement
 make better drills
 unlock ship building
 use new materials to unlock more ship parts and drills
 launch parts with ships
-unlock makaing parts
+unlock making parts
 have parts launched to space be bottle necks by ships
 make more ships to make more parts
 
@@ -20,4 +20,103 @@ Improvemnts
   resarch place for upgrades globaly
   expeditions for exploring planets
   radar for discovering new planets
-  shipping for moving resources hru planets
+  shipping for moving resources thru planets
+  mining for setting up minings
+explore planets to gather resorces and upgrade the station further
+
+Phase 3 Relic
+throughot some planets find relic things
+at some point find the core relic
+unlock a minigame type thing where you power up the relic
+relic being activated provides boosts
+and allows other relics to be upgraded and used to power up the core relic
+the open portal to the end of game/rebirth dimention
+
+mechanics
+
+refinement earth
+    pay x amount of ores to make a refined ore. smelting time for each ore smelted
+    different types of refined ores with different counts of ores
+    different drills give different ores
+    so that you can make differ refinements
+
+ships earth
+  from earth ships will be single use and you need to construyct a new ship every time resources are launched ship cost increases
+  per ship upgrade which is larger caryy size and fasterlaunch speeds and loading speeds
+  each upgrades are in chunks like t1 t2 t3 to simplify
+  upgrades
+    larger carry size - more resources launched
+    stablisation fields - allows for different materials to be launched like radioactive things or something
+    thrusters - faster time to go to station. shorter launch cooldown
+    loading bays - resources enter ship faster
+
+  Ships phase 2
+    similar to first ships thewill be used to send resources to the station except they are nolonger single use
+    idea 1
+      each plaent has its own ships that bottle neck their exports
+    idea 2
+      ships are built in the staaion and are allocated to plaents allowing for changing of bottlenecks if 1 resource is more requirted than another 
+
+research
+  labratory
+  have permanenbt upgrades that affect all operations every where
+  uses reaeach exclusive currency
+  prefeably keep these numbers lower like start in the 1s and go big is like the 1000s
+  keeps it more readable as this is a core progession system
+    obtaining
+      pay large amount of resources per point
+      machines that generate the resource
+radar
+  upgrade to unlockj new plantes to go to like boom beach radar
+  most planets acesssable thru radar
+  list within radar that is soraqtable for differnt panets with different resources
+  also have a visual star map thatr shows plantes and station
+  main progression system of phase 2
+
+expeditions
+  discoverd planets require an expeditionary force to scout before resource gathering operations can begin can begin
+  her you will buy groups and send them to planets to explore areas
+  groups can be upgradable allowing them to be able to explore certain tiles faster
+  upgrades will make the expedition finish scouting faster and also be less likeley to die
+  will go on cooldown if taken oput adn will have to wait to get them to recover
+  Tile effects
+    steepness
+    danger
+    hostility
+
+ux/ui
+
+main bar
+layout
+  title
+  layers
+  settings
+drop down folders
+open top to reveal layers below
+use full if there are alot of planets or for seperating phases
+e.g
+earth
+  ores
+  refinement
+  ships
+
+sidebar contents
+currencies
+have gain next to currency
+example
+123 points (2.3/sec)
+bottom of bar has button for switching tabs
+Currencies | lore? | meta stats
+have icons for these
+
+exploration grid in hexagons
+becaue they look cool
+
+over upgrades and buyables and stuff
+when hover show pop up of the currencys itws affects adn the change
+follow cursor
+|
+V
+Points       |Other points |
+now   13/sec |now    3/sec |
+after 15/sec |after  5/sec |
