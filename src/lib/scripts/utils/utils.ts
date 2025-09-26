@@ -4,16 +4,17 @@ import Decimal from "break_eternity.js";
 import { settings } from "./settings.svelte";
 
 const scales = [
-            { value: 1e30, suffix: "No" },
-            { value: 1e27, suffix: "Oc" },
-            { value: 1e24, suffix: "Sx" },
-            { value: 1e21, suffix: "Qi" },
-            { value: 1e18, suffix: "Qa" },
-            { value: 1e15, suffix: "T" },
-            { value: 1e12, suffix: "B" },
-            { value: 1e9,  suffix: "M" },
-            { value: 1e6,  suffix: "K" },
-            { value: 1000, suffix: "" }
+            { value: 1e30, suffix: "D" },
+            { value: 1e27, suffix: "No" },
+            { value: 1e24, suffix: "Oc" },
+            { value: 1e21, suffix: "Sx" },
+            { value: 1e18, suffix: "Qi" },
+            { value: 1e15, suffix: "Qa" },
+            { value: 1e12, suffix: "T" },
+            { value: 1e9,  suffix: "B" },
+            { value: 1e6,  suffix: "M" },
+            { value: 1000, suffix: "K" },
+            { value: 0,    suffix: "" }
         ];
 
 export function formatNumber(num: Decimal): string {
