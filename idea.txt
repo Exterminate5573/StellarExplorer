@@ -39,6 +39,7 @@ refinement earth
     different types of refined ores with different counts of ores
     different drills give different ores
     so that you can make differ refinements
+    for mixed thins make them alloys
 
 ships earth
   from earth ships will be single use and you need to construyct a new ship every time resources are launched ship cost increases
@@ -56,16 +57,35 @@ ships earth
       each plaent has its own ships that bottle neck their exports
     idea 2
       ships are built in the staaion and are allocated to plaents allowing for changing of bottlenecks if 1 resource is more requirted than another 
+    being built into stations makes it simpaer to upgraded patertar exports
+  
+  planets phase 2
+    mining could be simplified into a tierd system to simplify it. because going thru lotsa of different planets woulb be annoing
+    having planet upgrades be simplified would make it less futrationg if there are alot of plantets
+    other plaent system ideas
+      have each grid of exploirtaion be worth say a planet point
+      you can then allkocate plaent poinmts to differing planetmining operations
+      the initial lanign area will always have enough points to purchase basics
+      list of point ideas
+      exploration HQ first thing you buy required to unlock all else unrefundable
+      launch pad levels
+      drill levels
+      
+
 
 research
   labratory
   have permanenbt upgrades that affect all operations every where
   uses reaeach exclusive currency
+  skill tree (i like skill trees)
+    10% drill power
+    10% exploration speeds
   prefeably keep these numbers lower like start in the 1s and go big is like the 1000s
   keeps it more readable as this is a core progession system
     obtaining
       pay large amount of resources per point
-      machines that generate the resource
+      milestones to to aquire points
+      machines that generate the resource (not very good make realy slow so that you cant just make point gain machines to blitz thru resaerch)
 radar
   upgrade to unlockj new plantes to go to like boom beach radar
   most planets acesssable thru radar
@@ -79,10 +99,18 @@ expeditions
   groups can be upgradable allowing them to be able to explore certain tiles faster
   upgrades will make the expedition finish scouting faster and also be less likeley to die
   will go on cooldown if taken oput adn will have to wait to get them to recover
+  planets will have different types like
+  water planet
+  ateriod field
+  dry
+  mountains
+  jungle
   Tile effects
     steepness
     danger
     hostility
+  planetary exploration in hex grid because i like the lookj of hex grids
+  you must explore an area the you could get a [planet point]
 
 ux/ui
 
