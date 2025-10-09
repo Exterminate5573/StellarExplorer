@@ -76,6 +76,7 @@ ships earth
 research
   labratory
   have permanenbt upgrades that affect all operations every where
+  lock differing mechanics behind research like exploration
   uses reaeach exclusive currency
   skill tree (i like skill trees)
     10% drill power

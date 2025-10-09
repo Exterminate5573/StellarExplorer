@@ -1,0 +1,30 @@
+idea 2 txt
+
+miners layer
+upgrades
+    copper upgrade 1
+        cost 100 copper
+        boost drill gain by .1 copper/sec
+buyables
+    copper drill
+        base cost 10 copper
+        scale cost 1.1*
+        base gain .1 copper/sec
+
+resarch skill tree
+booster
+1 rp
+all planet drill mult 1.5
+↪   
+
+
+Planet points
+most thing should be on a tier 1 thru 5 level scaling
+also have the other things mnax levels based on the tier of the thing above them
+    Planetary HQ
+    ↪   mines
+        ↪   drills
+    ↪   exports (ship parts)
+        ↪   cargo
+        ↪   thrusters
+        ↪   loading
