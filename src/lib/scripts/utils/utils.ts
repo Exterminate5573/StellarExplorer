@@ -13,8 +13,7 @@ const scales = [
             { value: 1e12, suffix: "T" },
             { value: 1e9,  suffix: "B" },
             { value: 1e6,  suffix: "M" },
-            { value: 1000, suffix: "K" },
-            { value: 0,    suffix: "" }
+            { value: 1000, suffix: "K" }
         ];
 
 export function formatNumber(num: Decimal): string {
