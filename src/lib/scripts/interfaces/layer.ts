@@ -75,6 +75,13 @@ export abstract class Layer {
         }
     }
 
+    public getParentLayer(): Layer | undefined {
+        if (!this.parentLayer) {
+            return undefined;
+        }
+        return this.tree.getLayer(this.parentLayer);
+    }
+
     public getColor(highlight: boolean = false, greyOut: boolean = false, amount?: number): string {
         return greyOut ? greyOutColor(this.color, amount) : (highlight ? highlightColor(this.color, amount) : this.color);
     }
