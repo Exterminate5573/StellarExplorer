@@ -43,19 +43,20 @@
 
         <!-- List of each layer -->
         <div class="mt-16 mb-16 overflow-y-auto">
-            <!-- TODO: Only show unlocked tree layers -->
             {#each $gameStore.tree.tree as layer}
-                <button class="align-left p-4 w-full" aria-label={layer.layerID} onclick={() => settings.currentPageName = layer.layerID}
-                    onmouseenter={() => hoveredLayer = layer.layerID} onmouseleave={() => hoveredLayer = null}
-                    style="background-color: {layer.getColor(hoveredLayer === layer.layerID)}; {settings.currentPageName === layer.layerID ? 'box-shadow: inset 4px 0 0 0 white;' : ''}">
-                    <div class="flex">
-                        {#if settings.sidebarExtended}
-                            <span class="ml-2">{$t(layer.layerID + ".name")}</span>
-                        {:else}
-                            <span class="sr-only">{$t(layer.layerID + ".name")}</span>
-                        {/if}
-                    </div>
-                </button>
+                {#if layer.unlocked}
+                    <button class="align-left p-4 w-full" aria-label={layer.layerID} onclick={() => settings.currentPageName = layer.layerID}
+                        onmouseenter={() => hoveredLayer = layer.layerID} onmouseleave={() => hoveredLayer = null}
+                        style="background-color: {layer.getColor(hoveredLayer === layer.layerID)}; {settings.currentPageName === layer.layerID ? 'box-shadow: inset 4px 0 0 0 white;' : ''}">
+                        <div class="flex">
+                            {#if settings.sidebarExtended}
+                                <span class="ml-2">{$t(layer.layerID + ".name")}</span>
+                            {:else}
+                                <span class="sr-only">{$t(layer.layerID + ".name")}</span>
+                            {/if}
+                        </div>
+                    </button>
+                {/if}
             {/each}
         </div>  
 
