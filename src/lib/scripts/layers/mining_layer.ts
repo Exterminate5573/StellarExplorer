@@ -40,7 +40,7 @@ export class Mining extends Layer {
                 "copper_drill",
                 this,
                 //@ts-ignore
-                function() { return new Decimal(1).times(Decimal.pow(2, this.amount)); }
+                function() { return new Decimal(5).times(Decimal.pow(2, this.amount)); }
             )
         );
 
