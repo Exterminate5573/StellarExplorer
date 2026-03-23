@@ -38,6 +38,11 @@ export abstract class Layer {
         return cps;
     }
 
+    //Overridable method for layers to determine if they can be unlocked
+    public canUnlock(): boolean {
+        return false;
+    }
+
     public canBuyCurrency(): boolean {
         if (!this.parentLayer) {
             return false;
@@ -67,6 +72,10 @@ export abstract class Layer {
     }
 
     public update(diff: number): void {
+        if (this.canUnlock() && !this.unlocked) {
+            this.unlocked = true;
+        }
+
         if (this.currencyPerSecond().gt(0)) {
             this.currency = this.currency.plus(this.currencyPerSecond().times(diff / 1000));
         }

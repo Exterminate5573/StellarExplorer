@@ -35,7 +35,7 @@ export abstract class Tree {
         this.baseCurrency = new Decimal(10);
     }
 
-    update(diff: number) {
+    public update(diff: number) {
         for (const layer of this.tree) {
             layer.update(diff);
         }
