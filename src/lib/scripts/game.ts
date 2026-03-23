@@ -30,11 +30,11 @@ class Game {
         // Start the game loop
         setInterval(() => {
             const now = Date.now();
-            const diff = now - this.lastUpdate;
+            let diff = now - this.lastUpdate;
 
             // Set a maximum offline time
             if (diff > 3600000) {
-                this.lastUpdate = 3600000; // Cap the offline time to 1 hour
+                diff = 3600000; // Cap the offline time to 1 hour
             }
 
             this.update(diff);
