@@ -1,6 +1,7 @@
 import Decimal from "break_eternity.js";
 import { Tree } from "./interfaces/tree";
 import { Mining } from "./layers/mining_layer";
+import { Refinement } from "./layers/refinement_layer";
 import type { Layer } from "./interfaces/layer";
 import  { Achievement } from "./interfaces/achievement";
 
@@ -12,7 +13,8 @@ export class ExampleTree extends Tree {
 
     public createTree(): Layer[] {
         return [
-            new Mining(this)
+            new Mining(this),
+            new Refinement(this)
         ];
     }
 

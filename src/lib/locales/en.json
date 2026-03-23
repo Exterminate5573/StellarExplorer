@@ -26,8 +26,8 @@
     "name": "Stellar Explorer",
     "base_currency": {
       "name": "Minerals",
-      "header": "You have {count} minerals",
-      "gaining": "You are gaining {rate} minerals per second"
+      "header": "You have {count} ores",
+      "gaining": "You are gaining {rate} ores per second"
     }
   },
   "achievements": {
@@ -46,32 +46,45 @@
     }
   },
   "mining_layer": {
-    "name": "Cash",
-    "header": "You have {count} cash",
-    "gaining": "You are gaining {rate} cash per second",
-    "reset": "Reset for +{gain} cash",
-    "cost": "Cost: {cost} minerals",
+    "name": "Copper",
+    "header": "You have {count} copper",
+    "gaining": "You are gaining {rate} copper per second",
+    "reset": "Reset for +{gain} copper",
+    "cost": "Costs: {cost} ore",
+    "miners": {
+      "name": "Miners",
+      "description": "Increases mineral gain.",
+      "cost": "Costs: {cost} copper",
+      "amount": "You have {amount}",
+      "effect": "Generates {effect} minerals per second."
+    },
     "stronger_pickaxes": {
       "name": "Stronger Pickaxes",
-      "description": "Increases mineral gain based on cash you have.",
-      "cost": "{cost} cash"
+      "description": "Increases mineral gain based on copper you have.",
+      "cost": "{cost} copper"
     },
     "better_drills": {
       "name": "Better Drills",
       "description": "Doubles mineral gain.",
-      "cost": "{cost} cash"
+      "cost": "{cost} copper"
     },
-    "miners": {
-      "name": "Miners",
-      "description": "Increases mineral gain.",
-      "cost": "Costs: {cost} cash",
-      "amount": "You have {amount}",
-      "effect": "Generates {effect} minerals per second."
+    "copper_drill": {
+      "name": "Copper Drills",
+      "description": "Increases copper gain.",
+      "amount": "You have {amount} drills",
+      "cost": "Costs: {cost} copper"
     },
-    "milestone_1": {
+    "copper_ms_1": {
       "name": "First Milestone",
-      "description": "No longer reset minerals when you gain cash.",
-      "requirement": "Reach 50 cash"
+      "description": "No longer reset minerals when you gain copper.",
+      "requirement": "Reach 50 copper"
     }
+  },
+  "refinement_layer": {
+    "name": "Refinement",
+    "header": "You have {count} refined copper",
+    "gaining": "You are gaining {rate} refined copper per second",
+    "reset": "Reset for +{gain} refined copper",
+    "cost": "Costs: {cost} copper"
   }
 }

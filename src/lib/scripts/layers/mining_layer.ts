@@ -7,7 +7,7 @@ import { Milestone } from "../interfaces/milestone";
 export class Mining extends Layer {
 
     constructor(tree: any) {
-        super(tree, "mining_layer", undefined, "#c4c725ff", true);
+        super(tree, "mining_layer", undefined, "#B87333ff", true);
     }
 
     public registerSubcomponents(): void {
@@ -18,7 +18,7 @@ export class Mining extends Layer {
                 "miners",
                 this,
                 //@ts-ignore
-                function() { return new Decimal(1).times(Decimal.pow(2, this.amount.toNumber())); }
+                function() { return new Decimal(1).times(Decimal.pow(2, this.amount)); }
             )
         );
 
@@ -36,8 +36,17 @@ export class Mining extends Layer {
         );
 
         this.addComponentContainer(
+            new Buyable(
+                "copper_drill",
+                this,
+                //@ts-ignore
+                function() { return new Decimal(1).times(Decimal.pow(2, this.amount)); }
+            )
+        );
+
+        this.addComponentContainer(
           new Milestone(
-            "milestone_1", 
+            "copper_ms_1", 
             this, 
             () => this.currency.gte(50)
           )  
@@ -63,18 +72,22 @@ export class Mining extends Layer {
 
     public buyCurrency(): void {
         if (this.canBuyCurrency()) {
+            const gain = this.buyCurrencyGain();
             if (!this.getSubcomponentByID("milestone_1")?.achieved) {
                 this.tree.baseCurrency = new Decimal(0);
             } else {
                 this.tree.baseCurrency = this.tree.baseCurrency.minus(this.currencyCost());
             }
-            this.currency = this.currency.plus(this.buyCurrencyGain());
+            this.currency = this.currency.plus(gain);
         }
     }
 
     public buyCurrencyGain(): Decimal {
         let gain = new Decimal(1);
         
+        let b1: Decimal = this.getSubcomponentByID("copper_drill").amount;
+        gain = gain.plus(b1.times(0.1));
+
         return gain;
     }
 
