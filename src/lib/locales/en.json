@@ -8,7 +8,9 @@
       "standard": "Standard",
       "scientific": "Scientific",
       "engineering": "Engineering"
-    }
+    },
+    "hard_reset": "Hard Reset",
+    "hard_reset_desc": "Performing a hard reset will erase all your progress and start the game from the beginning. This action cannot be undone. Are you sure you want to proceed?"
   },
   "sidebar": {
     "settings": "Settings"
