@@ -26,13 +26,13 @@ export function formatNumber(num: Decimal): string {
             }
         default:
         case "scientific":
-            if (num.lte(1000)) {
+            if (num.lte(100000)) {
                 return num.toFixed(2);
             } else {
                 return num.toExponential(2);
             }
         case "engineering":
-            if (num.lte(1000)) {
+            if (num.lte(100000)) {
                 return num.toFixed(2);
             } else {
                 let exponent = num.log10().floor().div(3).floor().mul(3).toNumber();
