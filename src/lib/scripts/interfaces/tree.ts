@@ -40,6 +40,10 @@ export abstract class Tree {
             layer.update(diff);
         }
 
+        for (const achievement of this.achievements) {
+            achievement.checkCompletion();
+        }
+
         this.baseCurrency = this.baseCurrency.plus(this.currencyPerSecond().times(diff / 1000));
     }
 
